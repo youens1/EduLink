@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="static\images\icons\iconlogo.png" type="image/x-icon">
+    <title>Ajout de Cours</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+
+                
+            extend: {
+                fontFamily: { 
+                    Poppins : ["Poppins", "Arial"],
+                    barlow : ["Barlow", "Arial"],
+                },
+                colors: {
+                    darkblue: "#3D53A0",
+                    light:"#EEE8F4",
+                    grey:"#D9D9D9",
+                    red:"#D86F6F",
+                    blue:"#728DC7"
+                },
+            },
+            },
+        };
+    </script>
+</head>
+<body>
+    <header class="text-darkblue sticky top-0 bg-white">
+        <div class="flex items-center justify-between lg:mx-[120px]  md:mx-[50px] mx-[30px] lg:mt-[36px] md:mt-[25px] mt-[15px] ">
+            <img src="static\images\logo1.png" alt="" class="lg:w-[120px] w-[90px]">
+            <nav class="lg:flex gap-[34px] items-center hidden ">
+                <ul class="flex gap-[34px] items-center text-[14px]" >
+                    <li><a href="/add_courses">Cours</a></li>
+                    <li><a href="/view_grades">Notes</a></li>
+                </ul>
+                <a href="/profil" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white flex items-center gap-[11px]"> <img src="static\images\icons\user.png" alt="" class=" w-[14px]"> Profil</a>
+            </nav>
+            <button class="lg:hidden block "id="menubtn" ><img src="static\images\icons\menu.png" alt="" class="w-[33px] h-[33px] "></button>
+        </div>
+        <div id="navbar" class="hidden">
+            <ul class="flex flex-col gap-[34px] items-center text-[14px]" >
+                <li><a href="/add_courses">Cours</a></li>
+                <li><a href="/view_grades">Notes</a></li>
+                <a href="/profil" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white flex items-center gap-[11px]"> <img src="static\images\icons\user.png" alt="" class=" w-[14px]"> Profil</a>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <section class="font-Poppins lg:px-[240px] md:px-[50px] px-[30px] text-[14px] md:text-[16px] "> 
+            <h1 class="text-darkblue font-medium lg:text-[24px] md:text-[22] text-[20px] text-start lg:mt-[50px] mt-[30px]">Ajouter un Cours</h1>
+            <form method="post" action="{{ url_for('add_courses') }}" class=" mb-[30px] lg:mt-[50px] mt-[30px] text-blue font-semibold flex flex-col  mx-auto max-w-[450px] bg-light px-[50px]   py-[33px] rounded-[25px]">
+                <label for="course_name">Nom du cours :</label>
+                <input type="text" id="course_name" name="course_name"  class="h-[45px] rounded-[15px]  px-[25px] mb-[25px] border-2 border-darkblue " required><br>
+                <label for="course_description">Description du cours :</label>
+                <textarea id="course_description" name="course_description" class="h-[45px] rounded-[15px] pt-[10px]  px-[25px] mb-[25px] border-2 border-darkblue " required></textarea><br>
+                <label for="course_url">URL du cours :</label>
+                <input type="url" id="course_url" name="course_url" class="h-[45px] rounded-[15px]  px-[25px] mb-[25px] border-2 border-darkblue " required><br>
+                <input type="submit" value="Ajouter" class=" bg-darkblue rounded-2xl text-white font-normal px-6 py-2 w-fit">
+            </form>
+        </section>
+        <section class="font-Poppins lg:px-[240px] md:px-[50px] px-[30px] lg:pb-[50px]  ">
+            <h2 class="text-darkblue font-medium lg:text-[24px] md:text-[22] text-[20px] text-start">Liste des cours </h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="hidden border-solid border-2 border-green text-center rounded-[15px] " id="done-message" style="display:block;">
+                {% for category, message in messages %}
+                <p class="text-green">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            <ul class=" flex flex-col items-center gap-[80px] mt-[50px] ">
+                {% for course in courses %}
+                <li class=" bg-blue rounded-2xl p-[23px] w-[100%]">
+                    <h3 class="lg:text-[22px] md:text-[24px] text-[20px] font-semibold mb-4 text-white ">{{ course.name }}</h3>
+                    <p class=" mb-4 text-light text-[14px] md:text-[16px] text-wrap max-w-[450px]">{{ course.description }}</p>
+                    <div class="flex justify-end gap-[20px]">
+                        <a href="{{ course.url }}"  target="_blank" class="bg-[#EEE8F4] text-custom-blue px-6 py-2 rounded-lg transition-all duration-300 hover:bg-[#eee8f4a9]  w-fit">Voir le cours</a>
+                        <form method="POST" action="{{ url_for('delete_cours') }}">
+                            <input type="hidden" name="cours_id" value="{{ course.courses_id }}">
+                            <button type="submit"  class="bg-[#EEE8F4] text-custom-blue px-6 py-2 rounded-lg transition-all duration-300 hover:bg-[#eee8f4a9]  w-fit">Supprimer</button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+    <footer class="flex md:flex-row-reverse flex-col items-center md:justify-between lg:px-[120px] md:px-[50px] px-[30px] bg-light py-[30px] ">
+        <button>  
+            <a href="/logout" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white flex items-center gap-[11px]"> <img src="static\images\icons\logout.png" alt="" class=" w-[14px]">Deconnecter</a>
+        </button>
+        <div>
+            <p class="text-[14px] md:text-[16px] text-center lg:text-start text-blue"><a href="/politique">Mentions légales</a>- Copyright © 2024 EduLink - Tout droits réservés</p>
+        </div>
+    </footer>
+    <script src="static\main.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

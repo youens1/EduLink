@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="static\images\icons\iconlogo.png" type="image/x-icon">
+    <title>Login-EduLink</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+
+                
+            extend: {
+                fontFamily: { 
+                    Poppins : ["Poppins", "Arial"],
+                    barlow : ["Barlow", "Arial"],
+                },
+                colors: {
+                    darkblue: "#3D53A0",
+                    blue:"#728DC7",
+                    light:"#EEE8F4",
+                    grey:"#D9D9D9",
+                    red:"#D86F6F"
+                },
+            },
+            },
+        };
+    </script>
+  </head>
+  <body class="font-Poppins text-darkblue">
+    <header class="sticky top-0 left-0 right-0 bg-white">
+      <div class="flex items-center justify-between lg:mx-[120px]  md:mx-[50px] mx-[30px]  md:mt-[15px] mt-[10px] ">
+          <img src="static\images\logo1.png" alt="" class="lg:w-[120px] w-[90px]">
+          <nav class="lg:flex gap-[34px] items-center hidden ">
+              <ul class="flex gap-[34px] items-center text-[14px]" >
+              <li><a href="/">Accueil</a></li>
+              <li><a href="">À propos</a></li>
+              <li><a href="/contact">Contact</a></li>
+              </ul>
+              <a href="/login" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white">Se connecter</a>
+          </nav>
+          <button class="lg:hidden block "id="menubtn" ><img src="static\images\icons\menu.png" alt="" class="w-[33px] h-[33px] "></button>
+      </div>
+      <div id="navbar" class="hidden">
+          <ul class="flex flex-col gap-[34px] items-center text-[14px]" >
+              <li><a href="/">Accueil</a></li>
+              <li><a href="/about">À propos</a></li>
+              <li><a href="/contact">Contact</a></li>
+              <a href="/login" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white">Se connecter</a>
+          </ul>
+      </div>
+  </header>
+    <main>
+      <h1 class="text-center lg:text-[32px] md:text-[24px] text-[20px] font-medium md:mt-[80px] mt-[50px]">Bonjour, bienvenue sur la plateforme EduLink <br>d'apprentissage des étudiants </h1>
+      <p class=" text-[14px] text-grey text-center mt-[50px] mb-[36px]">Entrez vos coordonnées pour vous connecter à votre compte </p>
+      <div class="flex mx-auto items-center justify-center gap-[100px]">
+        <form action="" method="post" class="flex  flex-col md:w-[450px] bg-light px-[50px] text-[16px] font-medium pt-[80px] pb-[33px] rounded-[25px]">
+          <div class=" hidden border-solid border-2 border-red text-center rounded-[15px] relative top-[-20px]" id="error-message" {% if error %}style="display:block;"{% endif %}>
+            <p class="text-red">Connexion invalide, veuillez réessayer</p>
+          </div>
+          <label for="username" class="">Nom d’utilisateur </label> 
+          <input type="text" id="username" name="username" class="h-[45px] rounded-[15px] text-blue px-[25px] mb-[25px] border-2 border-darkblue ">
+          <label for="password">Mot de passe </label>   
+          <input type="password" id="password" name="password" class="h-[45px] rounded-[15px] text-blue px-[25px] border-2 border-darkblue mb-[14px]  ">
+          <button type="submit" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white w-[137px] mx-auto mt-[60px] ">se connecter</button>
+        </form>
+        <img src="static\images\image1.png" alt="" class="w-[410px] hidden lg:block">
+      </div>
+    </main>
+    <footer class="md:text-[18px] text-[16px] text-blue font-normal lg:px-[120px]  md:px-[50px] px-[30px] mt-[100px] bg-light py-[30px]">
+      <div class=" flex lg:flex-row flex-col lg:justify-between  mt-[30px]">
+          <div class="flex flex-col gap-[20px] lg:items-start md:items-center items-start">
+              <div class="flex items-center  gap-[22px]">
+                  <img src="static\images\icons\map.png" alt="map" class="w-[32px]">
+                  <a href="#">265 Av. Hassan II - 80020 Agadir - Maroc</a>
+              </div>
+              <div class="flex items-center  gap-[22px]">
+                  <img src="static\images\icons\phone.png" alt="phone" class="w-[32px]">
+                  <a type="phone" href="#">+212 (0) 1 23 45 67 89</a>
+              </div>
+              <div class="flex items-center  gap-[22px]">
+                  <img src="static\images\icons\mail.png" alt="mail" class="w-[32px]">
+                  <a type="mail" href="#">contact@edulink.ma</a>
+              </div>
+              <div class="flex gap-[40px] mt-[20px]">
+                  <a href="https://www.facebook.com/edulink.ma" target="_blank"><img src="static\images\icons\in.png" alt="" class="md:w-[40px] w-[32px]"></a>
+                  <a href="https://www.facebook.com/edulink.ma" target="_blank"><img src="static\images\icons\discord.png" alt="" class="md:w-[40px] w-[32px]"></a>
+                  <a href="https://www.facebook.com/edulink.ma" target="_blank"><img src="static\images\icons\instagram.png" alt="" class="md:w-[40px] w-[32px]"></a>
+              </div>
+          </div>
+          <ul class="space-y-[20px] flex flex-col lg:items-start md:items-center items-start lg:mt-0 mt-[80px] ">
+              <li class="font-medium text-darkblue">EduLink</li>
+              <li><a href="/about">À propos </a></li>
+              <li><a href="/contact">Conctat</a></li>
+              <li><a href="/login">Se connecter</a></li>
+          </ul>
+      </div>
+      <div class="mt-[50px]">
+          <p class="text-[14px] md:text-[16px] text-center lg:text-start"><a href="/politique">Mentions légales</a>- Copyright © 2024 EduLink - Tout droits réservés</p>
+      </div>
+    </footer>
+    <script src="static\main.js"></script>
+  </body>
+</html>

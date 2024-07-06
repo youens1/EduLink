@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="static\images\icons\iconlogo.png" type="image/x-icon">
+    <title>Cours</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+
+                
+            extend: {
+                fontFamily: { 
+                    Poppins : ["Poppins", "Arial"],
+                    barlow : ["Barlow", "Arial"],
+                },
+                colors: {
+                    darkblue: "#3D53A0",
+                    light:"#EEE8F4",
+                    grey:"#D9D9D9",
+                    red:"#D86F6F",
+                    blue:"#728DC7"
+                },
+            },
+            },
+        };
+    </script>
+</head>
+ 
+<body class="font-Poppins relative">
+    <header class="text-darkblue sticky top-0 bg-white">
+        <div class="flex items-center justify-between lg:mx-[120px]  md:mx-[50px] mx-[30px] lg:mt-[36px] md:mt-[25px] mt-[15px] ">
+            <img src="static\images\logo1.png" alt="" class="lg:w-[120px] w-[90px]">
+            <nav class="lg:flex gap-[34px] items-center hidden ">
+                <ul class="flex gap-[34px] items-center text-[14px]" >
+                    <li><a href="/courses">Cours</a></li>
+                    <li><a href="/student_grades">Notes</a></li>
+                </ul>
+                <a href="/profil" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white flex items-center gap-[11px]"> <img src="static\images\icons\user.png" alt="" class=" w-[14px]"> Profil</a>
+            </nav>
+            <button class="lg:hidden block "id="menubtn" ><img src="static\images\icons\menu.png" alt="" class="w-[33px] h-[33px] "></button>
+        </div>
+        <div id="navbar" class="hidden">
+            <ul class="flex flex-col gap-[34px] items-center text-[14px]" >
+                <li><a href="/courses">Cours</a></li>
+                <li><a href="/student_grades">Notes</a></li>
+                <a href="/profil" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white flex items-center gap-[11px]"> <img src="static\images\icons\user.png" alt="" class=" w-[14px]"> Profil</a>
+            </ul>
+        </div>
+    </header>
+    <main class="lg:px-[120px] md:px-[50px] px-[30px] ">
+        <h2 class="text-darkblue font-medium lg:text-[28px] md:text-[24px] text-[20px]  lg:mt-[100px] md:[70px] mt-[55px]">Mes cours </h2>
+        <ul class=" flex flex-col items-center gap-[80px] mt-[50px] ">
+            {% for course in courses %}
+            <li class=" bg-blue rounded-2xl p-[23px] w-[100%]">
+                <h3 class="lg:text-[22px] md:text-[24px] text-[20px] font-semibold mb-4 text-white ">{{ course.name }}</h3>
+                <p class=" mb-4 text-light text-[14px] md:text-[16px] ">{{ course.description }}</p>
+                <div class="flex justify-end">
+                    <a href="{{ course.url }}" target="_blank" class="bg-[#EEE8F4] text-custom-blue px-6 py-2 rounded-lg transition-all duration-300 hover:bg-[#eee8f4a9]  w-fit">Voir plus</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+    <footer class="flex md:flex-row-reverse flex-col items-center md:justify-between lg:px-[120px] md:px-[50px] px-[30px] bg-light py-[30px]  ">
+        <button>  
+            <a href="/logout" class="bg-darkblue py-[10px] px-[14px] rounded-2xl text-white flex items-center gap-[11px]"> <img src="static\images\icons\logout.png" alt="" class=" w-[14px]">Deconnecter</a>
+        </button>
+        <div>
+            <p class="text-[14px] md:text-[16px] text-center lg:text-start text-blue"><a href="/politique">Mentions légales</a>- Copyright © 2024 EduLink - Tout droits réservés</p>
+        </div>
+    </footer>
+    <script src="static\main.js"></script>
+</body>
+</html>
